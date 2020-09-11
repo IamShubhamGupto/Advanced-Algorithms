@@ -3,4 +3,5 @@
 //#include "header.h"
 void initialize_string(char* string, int m);
 int NaiveString(char* text, char* pattern);
+int ModNaiveString(char* text, char* pattern);
 #endif
