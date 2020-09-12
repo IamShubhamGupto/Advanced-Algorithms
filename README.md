@@ -5,4 +5,8 @@ Implementations of all algorithms learnt in the course UE18CS311
 * Naive String Algorithm
 * Modified Naive String Algorithm
 * Rabin-Karp Algorithm
-* Knuth-Morris-Pratt Algorithm 
+* Knuth-Morris-Pratt Algorithm
+
+### ToDO
+* FSM
+* Suffix Tree
