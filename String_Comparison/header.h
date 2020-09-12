@@ -6,4 +6,6 @@ void initialize_string(char* string, int m);
 int NaiveString(char* text, char* pattern);
 int ModNaiveString(char* text, char* pattern);
 int RabinKarp(char* text, char* pattern, int q);
+int KMP(char* text, char* pattern);
+void computeLPS(char* pattern, int m,int* lps);
 #endif
