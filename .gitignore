@@ -1,7 +1,9 @@
 # Prerequisites
 *.d
 *.json
-
+*.docx
+*.pdf
+*.odt
 # Object files
 *.o
 *.ko
