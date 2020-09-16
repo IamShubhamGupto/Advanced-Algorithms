@@ -134,6 +134,7 @@ int KMP(char* text, char* pattern){
             }
         }    
     }
+    free(lps);
     return -1;
 }
 void computeLPS(char* pattern, int m,int* lps){
@@ -154,4 +155,12 @@ void computeLPS(char* pattern, int m,int* lps){
             }
         }
     }
+}
+int FSM(char* text, char* pattern){
+    int n = strlen(text);
+    int m = strlen(pattern);
+    if(m > n)
+        return -1;    
+
+    
 }

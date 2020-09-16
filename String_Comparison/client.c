@@ -12,7 +12,7 @@ int main(){
     char* pattern;
     int result;
     while(flag){
-        printf("------------------------\nSelect a algorithm\nNaive String - 1\nModified Naive String - 2\nRobin Karp - 3\nKMP - 4\n------------------------\n");
+        printf("------------------------\nSelect a algorithm\nNaive String - 1\nModified Naive String - 2\nRobin Karp - 3\nKMP - 4\nFSM - 5\n------------------------\n");
         scanf(" %c",&choice);
         printf("Enter size of text\n");
         scanf("%d",&n);
@@ -77,6 +77,14 @@ int main(){
                 free(text);
                 free(pattern);
                 break;
+            case '5':
+                if(DEBUG){
+                    printf("Algorithm 5\n");
+                }
+                result = FSM(text,pattern);
+                printf("------------------------\nPattern occurs at %d th index\n------------------------\n",result);
+                free(text);
+                free(pattern);
             default: flag = 0;    
         }
         
