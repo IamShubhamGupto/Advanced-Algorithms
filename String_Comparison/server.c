@@ -2,6 +2,9 @@
 #include<stdlib.h>
 #include<string.h>
 #include "header.h"
+
+#define NO_OF_CHARS 256
+
 void readTextAndPattern(char* text, char* pattern){
     int n,m;
     printf("Enter size of text\n");
@@ -162,5 +165,43 @@ int FSM(char* text, char* pattern){
     if(m > n)
         return -1;    
 
-    
+    int** TF = (int**)malloc(sizeof(int*)*(m+1));
+    int i,j;
+    for(i = 0; i <= m; i++){
+        TF[i] = (int*)malloc(sizeof(int)*NO_OF_CHARS);
+        /*
+        for(j = 0; j < NO_OF_CHARS; j++){
+            TF[i][j] = 0;
+        }
+        */
+    }
+    computeTransitions(pattern, TF);
+    j = 0;
+    for(i = 0; i < n; i++){
+        j = TF[j][(int)text[i]];
+        if(j == m){
+            free(TF);
+            return i-m+1;
+        }
+    }
+    free(TF);
+    return -1;
+
+}
+void computeTransitions(char* pattern, int** TF){
+    int m = strlen(pattern);
+    int i, x, lps = 0;
+    for(x = 0; x < NO_OF_CHARS; x++){
+        TF[0][x] = 0;
+    }
+    TF[0][(int)pattern[0]] = 1;
+    for(i = 1; i <= m; i++){
+        for(x = 0; x < NO_OF_CHARS; x++){
+            TF[i][x] = TF[lps][x];
+        }
+        TF[i][(int)pattern[i]] = i+1;
+        if(i < m){
+            lps = TF[lps][(int)pattern[i]];
+        }
+    }
 }

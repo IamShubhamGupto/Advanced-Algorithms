@@ -8,4 +8,6 @@ int ModNaiveString(char* text, char* pattern);
 int RabinKarp(char* text, char* pattern, int q);
 int KMP(char* text, char* pattern);
 void computeLPS(char* pattern, int m,int* lps);
+int FSM(char* text, char* pattern);
+void computeTransitions(char* pattern, int** TF);
 #endif
