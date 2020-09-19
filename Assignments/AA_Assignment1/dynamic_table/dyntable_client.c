@@ -2,8 +2,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
-#define BENCHMARK_COUNT 5
+#define BENCHMARK_COUNT 100
 
+#define DEBUG 0
 
 // call this function to start a nanosecond-resolution timer
 struct timespec timer_start(){
@@ -27,12 +28,18 @@ int main() {
         struct timespec vartime = timer_start();
 		if(rand()%2) {        
 			push_back(&dt, random()%BENCHMARK_COUNT);
+			if(DEBUG)
+				printf("push ");
 		}
         else {
           	pop_back(&dt);
+			if(DEBUG)  
+				printf("pop ");  
         }
         long time_elapsed_nanos = timer_end(vartime);
-        printf("%ld\n", time_elapsed_nanos);
+        printf("i = %d, %ld\n",i, time_elapsed_nanos);
+		if(DEBUG)
+			printf("address of table %p\n", (void *) &dt);
     }
 	free(dt);
 }
