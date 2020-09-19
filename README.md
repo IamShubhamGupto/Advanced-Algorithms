@@ -11,8 +11,9 @@ Implementations of all algorithms learnt in the course UE18CS311
 * Modified Naive String Algorithm
 * Rabin-Karp Algorithm
 * Knuth-Morris-Pratt Algorithm
+* Finite Automata String matching algorithm
 
 ### ToDo
-~~FSM~~   
+* ~~FSM~~   
 * Suffix Tree
 * Assignment 1
