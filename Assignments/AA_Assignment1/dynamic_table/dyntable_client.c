@@ -5,7 +5,7 @@
 #define BENCHMARK_COUNT 100
 
 #define DEBUG 0
-
+#define STRUCT_HACK 0
 // call this function to start a nanosecond-resolution timer
 struct timespec timer_start(){
 	struct timespec start_time;
@@ -41,5 +41,6 @@ int main() {
 		if(DEBUG)
 			printf("address of table %p\n", (void *) &dt);
     }
+
 	free(dt);
 }
