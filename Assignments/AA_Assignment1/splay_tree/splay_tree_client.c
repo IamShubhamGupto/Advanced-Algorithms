@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <time.h>
 #define BENCHMARK_COUNT 100
-
+#define DEBUG 0
 
 // function to start a nanosecond-resolution timer
 struct timespec timer_start(){
@@ -27,13 +27,19 @@ int main() {
     for(int i=1; i<=BENCHMARK_COUNT; ++i) {
         struct timespec vartime = timer_start();
         if(rand()%2) {
+            if(DEBUG)
+                printf("Insert i = %d ",i);
             insert(dictionary, random()%BENCHMARK_COUNT, random()%BENCHMARK_COUNT);
         }
         else {
+            if(DEBUG)
+                printf("Find i = %d ",i);
             printf("%d ", find(dictionary, random()%BENCHMARK_COUNT));
             // find(dictionary, random()%BENCHMARK_COUNT);
         }
+        
         long time_elapsed_nanos = timer_end(vartime);
         printf("%ld\n", time_elapsed_nanos);
     }
+    free(dictionary);
 }
