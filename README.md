@@ -16,4 +16,5 @@ Implementations of all algorithms learnt in the course UE18CS311
 ### ToDo
 * ~~FSM~~   
 * Suffix Tree
-* Assignment 1
+* ~~Assignment 1~~
+* Assignment 2
