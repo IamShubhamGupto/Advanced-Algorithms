@@ -1,6 +1,6 @@
 #ifndef SPLAY_TREE_IMPLH
 #define SPLAY_TREE_IMPLH
-
+//extern unsigned long long int rotations;
 // Initialise the dictionary
 void* make_new_dictionary();
 

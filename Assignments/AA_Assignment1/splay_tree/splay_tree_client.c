@@ -4,7 +4,8 @@
 #include <time.h>
 #define BENCHMARK_COUNT 100
 #define DEBUG 0
-
+//unsigned long long int rotations;
+unsigned long long int total_time;
 // function to start a nanosecond-resolution timer
 struct timespec timer_start(){
 	struct timespec start_time;
@@ -39,7 +40,10 @@ int main() {
         }
         
         long time_elapsed_nanos = timer_end(vartime);
+        total_time += time_elapsed_nanos;
         printf("%ld\n", time_elapsed_nanos);
     }
+    //printf("Total number of rotations = %llu\n",rotations);
+    printf("Total time taken = %llu\n", total_time);
     free(dictionary);
 }

@@ -2,10 +2,12 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
-#define BENCHMARK_COUNT 100
+#define BENCHMARK_COUNT 1000000
 
 #define DEBUG 0
 #define STRUCT_HACK 0
+
+unsigned long long int total_time;
 // call this function to start a nanosecond-resolution timer
 struct timespec timer_start(){
 	struct timespec start_time;
@@ -37,10 +39,14 @@ int main() {
 				printf("pop ");  
         }
         long time_elapsed_nanos = timer_end(vartime);
-        printf("i = %d, %ld\n",i, time_elapsed_nanos);
+		total_time += time_elapsed_nanos;
+
+        printf("%ld\n",i, time_elapsed_nanos);
 		if(DEBUG)
 			printf("address of table %p\n", (void *) &dt);
+		
     }
-
+	//printf("Total number of copies made = %llu\n",copies);
+	printf("Total time taken = %llu\n",total_time);	
 	free(dt);
 }

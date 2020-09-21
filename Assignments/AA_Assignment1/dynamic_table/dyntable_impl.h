@@ -1,6 +1,6 @@
 #ifndef DYNTABLE_IMPLH
 #define DYNTABLE_IMPLH
-
+//extern unsigned long long int copies;
 // Initialize a dynamic table.
 // the argument specifies the initial number of elements the dynamic table should be able to hold without being resized
 void* make_new_dynamic_table(int);
