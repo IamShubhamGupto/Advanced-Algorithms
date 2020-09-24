@@ -14,6 +14,8 @@ Implementations of all algorithms learnt in the course UE18CS311
 * Finite Automata String matching algorithm
 
 ## Chpater - 5 Dynamic_Programming
+* Coin Row Problem  
+
 ### ToDo
 * ~~\[C2\] FSM~~   
 * \[C2\] Suffix Tree
