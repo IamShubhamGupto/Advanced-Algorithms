@@ -3,7 +3,7 @@
 #include<string.h>
 #define d 31
 #define q 1000000007
-#define DEBUG 1
+#define DEBUG 0
 
 static void fill_hash_table(char* pattern, long long int* hash_table, long long int* pow_table);
 static int find_longest_prefix(long long int* hash_table, long long int* pow_table, int division, int length_of_hashtable);
