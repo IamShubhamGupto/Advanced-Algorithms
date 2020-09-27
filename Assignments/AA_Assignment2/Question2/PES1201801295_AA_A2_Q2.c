@@ -3,7 +3,7 @@
 #include<string.h>
 #define d 31
 #define q 1000000007
-#define DEBUG 0
+#define DEBUG 1
 
 static void fill_hash_table(char* pattern, long long int* hash_table, long long int* pow_table);
 static int find_longest_prefix(long long int* hash_table, long long int* pow_table, int division, int length_of_hashtable);
@@ -18,7 +18,12 @@ static int find_longest_prefix(long long int* hash_table, long long int* pow_tab
         
         int mid = longest_prefix_set + (longest_prefix_not_set - longest_prefix_set)/2;
         l_val = (hash_table[longest_prefix_set]*pow_table[division])%q;
-        r_val = (hash_table[division+longest_prefix_set]%q - hash_table[division]%q +q)%q;
+        if(division + longest_prefix_set > length_of_hashtable){
+            r_val = (hash_table[length_of_hashtable]%q - hash_table[division]%q +q)%q;
+        }else{
+            r_val = (hash_table[division+longest_prefix_set]%q - hash_table[division]%q +q)%q;
+        }
+        
         if(DEBUG){
             printf("longest prefix set = %d longest prefix not set = %d\n",longest_prefix_set,longest_prefix_not_set);
             printf("mid = %d\n",mid);
@@ -53,14 +58,14 @@ static void fill_hash_table(char* pattern, long long int* hash_table, long long 
     }
 
     if(DEBUG){
-        printf("pow_table = \n");
+        printf("[fill_hash_table] pow_table = \n");
         for(i = 0; i <= m; i++){
             printf("%d ",pow_table[i]);
         }
         printf("\n");
     }
     if(DEBUG){
-        printf("hash_table = \n");
+        printf("[fill_hash_table] hash_table = \n");
         for(i = 0; i <= m; i++){
             printf("%llu ",hash_table[i]);
         }
@@ -92,5 +97,6 @@ int main(){
     }
     free(pow_table);
     free(hash_table);
+    free(text);
     return 0;
 }
