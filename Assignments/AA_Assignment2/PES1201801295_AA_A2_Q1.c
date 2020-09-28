@@ -4,10 +4,16 @@
 
 #define DEBUG 0
 
-int KMP(char*, char*);
-void computeLPS(char* , int ,int* );
-
-void computeLPS(char* pattern, int m,int* lps){
+static int find_min_rotations(char*, char*);
+static void compute_lps_table(char* , int ,int* );
+/*  *
+    * Fills an array Longest Proper Suffix based on position of characters in pattern
+    * @params: pattern: search pattern entered by user
+    *          m: length of pattern
+    *          lps: an array of integers holding positions of last known index of pattern[i], by default 0
+    * @return: void 
+*/
+static void compute_lps_table(char* pattern, int m,int* lps){
     int len = 0;
     int i = 1;
     lps[0] = 0;
@@ -16,55 +22,58 @@ void computeLPS(char* pattern, int m,int* lps){
             len++;
             lps[i] = len;
             i++;
+        }else if(len != 0){
+            len = lps[len-1];
         }else{
-            if(len != 0){
-                len = lps[len-1];
-            }else{
-                lps[i] = 0;
-                i++;
-            }
+            lps[i] = 0;
+            i++;
         }
+        
     }
 }
-
-int KMP(char* text, char* pattern){
+/*  *
+    * Finds the minimum number of rotations to be applied on text such that both text and pattern have the longest prefix
+    * @params: text: text to be rotated by program
+    *          pattern: pattern to be searched
+    * @return: [integer] least number of rotations required  
+*/
+static int find_min_rotations(char* text, char* pattern){
     int n = strlen(text);
     int m = strlen(pattern);
     int* lps = (int*)malloc(sizeof(int)*m);
     int i;
-    int j = 0;
+    int pattern_i = 0;
     int max_prefix_length = 0;
     for(i = 0; i < m; i++){
         lps[i] = 0;
     }
     i = 0;
-    int min_rotations = n+1;
-    computeLPS(pattern,m,lps);
+    int min_rotations = 0;
+    compute_lps_table(pattern,m,lps);
     while(i < n){
-        if(text[i] == pattern[j]){
+        if(text[i] == pattern[pattern_i]){
             if(DEBUG){
-                printf("Matched pattern j(prefix_length) = %d, i = %d\n",j,i);
+                printf("Matched pattern pattern_i(prefix_length) = %d, i = %d\n",pattern_i,i);
             }
             i++;
-            j++;
-            
+            pattern_i++;    
         }
-        if(j == m){
+        if(pattern_i == m){
             if(DEBUG){
                 printf("[j==m] full string match\n");
             }
             max_prefix_length = m;
-            min_rotations = (i-j)%(n/2);
+            min_rotations = (i-pattern_i)%(n/2);
             break;
-        }else if(i < n && text[i] != pattern[j]){
-            if(max_prefix_length < j){
+        }else if(i < n && text[i] != pattern[pattern_i]){
+            if(max_prefix_length < pattern_i){
                 if(DEBUG)
-                    printf("max_prefix_length now is %d i = %d\n",j,i);
-                max_prefix_length = j;
-                min_rotations = (i-j)%(n/2);
+                    printf("max_prefix_length now is %d i = %d\n",pattern_i,i);
+                max_prefix_length = pattern_i;
+                min_rotations = (i-pattern_i)%(n/2);
             }
-            if(j != 0){
-                j = lps[j-1];
+            if(pattern_i != 0){
+                pattern_i = lps[pattern_i-1];
             }else{
                 i++;
             }
@@ -77,8 +86,10 @@ int main(){
     int n;
     int i = 0;
     scanf("%d",&n);
-    if(n <= 0)
+    if(n <= 0){
+        printf("0\n");
         exit(0);
+    }
     char* pattern = (char*)malloc(sizeof(char)*(n+1));
     char* text = (char*)malloc(sizeof(char)*(2*n+1));
     scanf("%s",pattern);
@@ -92,7 +103,7 @@ int main(){
         printf("[main] Text = %s\n",text);
         printf("[main] Pattern = %s\n",pattern);
     }
-    int result = KMP(text,pattern);
+    int result = find_min_rotations(text,pattern);
     printf("%d\n",result);
     free(pattern);
     free(text);
