@@ -9,6 +9,7 @@ Implementations of all algorithms learnt in the course UE18CS311
 ### Assignment 2
 * Find longest common prefix in 2 strings using minimum R rotations
 * Find longest common prefix in 2 substrings of a string using Rabin Karp and Binary Search method
+    [link to a similar question](https://www.codechef.com/problems/INSQ15_A)
 
 ## Chapter - 2 String_Comparisons
 * Naive String Algorithm
