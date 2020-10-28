@@ -3,19 +3,19 @@
 #include<string.h>
 #define DEBUG 0
 #define q 1000000007
-int compare_characters(char a, char b){
+int compare_characters(const int a, const int b){
     if((a >= 65 && a <= 90) && (b >= 65 && b <= 90) && (a == b)){
         return 1;
     }else if((a >= 97 && a <= 122) && (b >= 97 && b <= 122) && (a == b)){
         return 1;
-    }else if((a >= 65 && a <= 90) && (b >= 97 && b <= 122) && ((int)a + 32 == (int)b)){
+    }else if((a >= 65 && a <= 90) && (b >= 97 && b <= 122) && (a + 32 == b)){
         return 1;
-    }else if((a >= 97 && a <= 122) && (b >= 65 && b <= 90) && ((int)a == (int)b + 32)){
+    }else if((a >= 97 && a <= 122) && (b >= 65 && b <= 90) && (a == b + 32)){
         return 1;
     }
     return 0;
 }
-int get_minimum(int a, int b){
+int get_minimum(const int a, const  int b){
     if(a > b){
         return b;
     }
@@ -44,7 +44,7 @@ int solve(const char text1[1000], const char text2[1000]){
             }else if(compare_characters(text1[j-1],text2[i-1])){
                 dp[i%2][j] = dp[(i-1)%2][j-1];
             }else{
-                dp[i%2][j] = 1 + get_minimum(dp[(i - 1) % 2][j],dp[i % 2][j - 1]);
+                dp[i%2][j] = 1 + get_minimum(dp[(i - 1) % 2][j], dp[i % 2][j - 1]);
             }
         }
     }
