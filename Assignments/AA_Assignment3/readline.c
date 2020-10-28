@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-#define DEBUG 1
+#define DEBUG 0
 #define q 1000000007
 /*
 int main(){
@@ -68,21 +68,17 @@ int main(){
     while(T--){
         int i = 0;
         int first = 1;
-        //int empty = 0;
         int len1 = 0;
         int len2 = 0;
         while(1){
             c = getchar_unlocked();
-            if(DEBUG){
-                printf("i = %d %c \n",i,c);
-            }
-            
             if(c != 0x0A){
                 if(c == ' '){
                     first = 0;
                     text1[i]='\0';
                     len1 = i;
-                    printf("l = %d\n",len1);
+                    
+                    
                 }else if(first){
                     text1[i] = c;
                 }else{
@@ -92,6 +88,10 @@ int main(){
                 len2 = i;
                 text2[i-len1-1] = '\0';
                 break;
+            }
+            if(DEBUG){
+                printf("i = %d %c \n",i,c);
+                printf("len1 = %d\n",len1);
             }
             ++i;  
         }
@@ -107,6 +107,7 @@ int main(){
             int l2 = strlen(text2);
             printf("text1 = %s text2 = %s l1 = %d l2 = %d \n",text1,text2,l1,l2);
         }
+        printf("t1=%s t2=%s\n",text1,text2);
     }
     return 0;
 }
