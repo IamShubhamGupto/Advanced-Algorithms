@@ -4,6 +4,16 @@
 #define DEBUG 0
 #define q 1000000007
 int compare_characters(const int a, const int b){
+    int d_a = a - 96;;
+    int d_b = b - 96;
+    if(a >=65 && a <= 90){
+        d_a  = a - 64;
+    }
+    if(b >=65 && b <= 90){
+        d_b  = b - 64;
+    }
+    return abs(d_a-d_b);
+    /*
     if((a >= 65 && a <= 90) && (b >= 65 && b <= 90) && (a == b)){
         return 1;
     }else if((a >= 97 && a <= 122) && (b >= 97 && b <= 122) && (a == b)){
@@ -14,6 +24,7 @@ int compare_characters(const int a, const int b){
         return 1;
     }
     return 0;
+    */
 }
 int get_minimum(const int a, const  int b){
     if(a > b){
@@ -36,7 +47,7 @@ void display_table( long long int**dp, const int l1,const int l2){
     }
     printf("\n");
 }
-int solve(const char text1[1000], const char text2[1000]){
+int solve(const char text1[1001], const char text2[1001]){
     int l1 = strlen(text1);
     int l2 = strlen(text2);
     int i,j,a,b;
@@ -56,14 +67,9 @@ int solve(const char text1[1000], const char text2[1000]){
     for(i = 1; i <= l1; i++){
         dp[i%2][0] = i%q;
         for(j = 1; j <= l2; j++){
-            if(compare_characters(text1[i-1],text2[j-1])){
-                cost = 0;
-            }else{
-                a = get_position(text1[i-1]);
-                b = get_position(text2[j-1]);
-                cost = abs(a-b);
-            }
-            dp[i%2][j] = get_minimum(dp[(i - 1) % 2][j]+cost, get_minimum(dp[(i - 1)% 2][j - 1] + cost, dp[i % 2][j - 1]+cost));
+            cost = compare_characters(text1[i-1],text2[j-1]);
+            dp[i%2][j] = get_minimum(dp[(i - 1) % 2][j]%q + cost%q, 
+                get_minimum(dp[(i - 1)% 2][j - 1]%q + cost%q, dp[i % 2][j - 1]%q + cost%q));
         }  
     }
     //display_table(dp,l1,l2);
@@ -79,8 +85,8 @@ int solve(const char text1[1000], const char text2[1000]){
 int main(){
     int T;
     char c;
-    char text1[1000];
-    char text2[1000];
+    char text1[1001];
+    char text2[1001];
     int i;
     int first;
     int len1;
@@ -89,14 +95,14 @@ int main(){
     text1[0] = '\0';
     text2[0] = '\0';
     scanf("%d",&T);
-    c = getchar_unlocked();
+    c = getchar();
     while(T--){
         i = 0;
         first = 1;
         len1 = 0;
         len2 = 0;
         while(1){
-            c = getchar_unlocked();
+            c = getchar();
             if(c != 0x0A){
                 if(c == ' '){
                     first = 0;
@@ -130,11 +136,9 @@ int main(){
         }
         if(len1 == 0){
             result = len2;
-        }
-        if(len2 == 0){
+        }else if(len2 == 0){
             result = len1;
-        }
-        if(len1 > 0 && len2 > 0){
+        }else{
             result = solve(text1,text2);
         }
         printf("%lld\n",result);

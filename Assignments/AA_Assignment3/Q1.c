@@ -22,10 +22,21 @@ int main(){
             MAX_N = N_values[temp-T-1];
         }
     }
+    if(MAX_N%2 == 0){
+        if(MAX_N%3 != 0){
+            MAX_K = MAX_N/3;
+        }else{
+            MAX_K = MAX_N/4;
+        }
+    }else{
+        MAX_K = MAX_N/4 + 1;
+    }
+    /*
     MAX_K = MAX_N/4;
     if(MAX_N%4 == 1){
         ++MAX_K;
     }
+    */
     int*** dp = (int***)malloc(sizeof(int**)*MAX_N);
     for(i = 0; i < MAX_N; i++){
         dp[i] = (int**)malloc(sizeof(int*)*MAX_K);
@@ -36,6 +47,7 @@ int main(){
             }
         }
     }
+
     for(i = 0; i < MAX_N; i++){
         //dp[i] = (int**)malloc(sizeof(int*)*MAX_K);
         for(j = 0; j < MAX_K; j++){

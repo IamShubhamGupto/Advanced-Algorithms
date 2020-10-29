@@ -57,7 +57,7 @@ int main(){
     return 0;
 }
 */
-
+/*
 int main(){
     int T;
     char c;
@@ -108,6 +108,16 @@ int main(){
             printf("text1 = %s text2 = %s l1 = %d l2 = %d \n",text1,text2,l1,l2);
         }
         printf("t1=%s t2=%s\n",text1,text2);
+    }
+    return 0;
+}
+*/
+int main(){
+    int t = 5;
+    char* input[2002];
+    while(t--){
+        scanf("%[^\n] ",input);
+        printf("input = %s\n",input);
     }
     return 0;
 }
