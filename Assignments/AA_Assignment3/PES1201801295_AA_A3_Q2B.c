@@ -3,6 +3,7 @@
 #include<string.h>
 #define DEBUG 0
 #define q 1000000007
+
 int compare_characters(const int a, const int b){
     
     int d_a = a - 96;;
@@ -14,18 +15,6 @@ int compare_characters(const int a, const int b){
         d_b  = b - 64;
     }
     return abs(d_a-d_b);
-    /*
-    if((a >= 65 && a <= 90) && (b >= 65 && b <= 90) && (a == b)){
-        return 1;
-    }else if((a >= 97 && a <= 122) && (b >= 97 && b <= 122) && (a == b)){
-        return 1;
-    }else if((a >= 65 && a <= 90) && (b >= 97 && b <= 122) && (a + 32 == b)){
-        return 1;
-    }else if((a >= 97 && a <= 122) && (b >= 65 && b <= 90) && (a == b + 32)){
-        return 1;
-    }
-    return 0;
-    */
 }
 int get_minimum(const int a, const  int b){
     if(a > b){
@@ -33,13 +22,7 @@ int get_minimum(const int a, const  int b){
     }
     return a;
 }
-int get_maximum(const int a, const  int b){
-    if(a > b){
-        return a;
-    }
-    return b;
-}
-void display_table(long long int**dp, const int l1,const int l2){
+void display_table( long long int**dp, const int l1,const int l2){
     for(int i = 0; i < 2; i++){
         for(int j = 0; j <= l2; j++){
             printf("%lld ",dp[i][j]);
@@ -53,32 +36,62 @@ int solve(const char text1[1001], const char text2[1001]){
     int l2 = strlen(text2);
     int i,j;
     long long int result;
-    long long int** dp = (long long int**)malloc(sizeof(int*)*(2));
-    for(i = 0; i <2; i++){
+    long long int** dp = (long long int**)malloc(sizeof(long long int*)*2);
+    int cost = 1;
+    for(i = 0; i < 2; i++){
         dp[i] = (long long int*)malloc(sizeof(long long int)*(l2+1));
-        dp[i][0] = 0;
-        for(j = 0;j <= l2; j++){
-            dp[0][j] = 0;
+        for(j = 0; j <= l2; j++){
+            if(i == 0){
+                dp[i][j] = j%q;
+            }else{
+                dp[i][j] = 0;
+            }
         }
     }
     for(i = 1; i <= l1; i++){
+        dp[i%2][0] = i%q;
         for(j = 1; j <= l2; j++){
+            //cost = compare_characters(text1[i-1],text2[j-1]);
             if(compare_characters(text1[i-1],text2[j-1]) == 0){
-                dp[i%2][j] = dp[(i-1)%2][j-1]%q + 1;
+                cost = 0;
             }else{
-                dp[i%2][j] = get_maximum(dp[i%2][j-1], dp[(i-1)%2][j])%q;
+                cost = 1;
             }
-        } 
+            dp[i%2][j] = get_minimum(dp[(i - 1) % 2][j]+1, 
+                get_minimum(dp[(i - 1)% 2][j - 1] + cost, dp[i % 2][j - 1]+1));
+        }  
     }
-    //display_table(dp,l1,l2);
+    if(DEBUG){
+        display_table(dp,l1,l2);
+    }
     result = dp[l1%2][l2];
-    for(i = 0; i <2; i++){
+    for(i = 0; i < 2; i++){
         free(dp[i]);
     }
     free(dp);
-    return (l1%q - result%q + l2%q - result%q + q)%q;
+    return result%q;
 
 }
+int main(){
+    int T;
+    char text1[1001];
+    char text2[1001];
+    int result;
+    scanf("%d",&T);
+    while(T--){
+        scanf("%s %[^\n]",text1,text2);
+        
+        if(DEBUG){
+            int l1 = strlen(text1);
+            int l2 = strlen(text2);
+            printf("%s %s %d %d \n",text1,text2,l1,l2);
+        }
+        result = solve(text1, text2);
+        printf("%d\n",result);
+    }
+    return 0;
+}
+/*
 int main(){
     int T;
     char c;
@@ -140,26 +153,6 @@ int main(){
         }
         printf("%lld\n",result);
 
-    }
-    return 0;
-}
-/*
-int main(){
-    int T;
-    char text1[1000];
-    char text2[1000];
-    int result;
-    scanf("%d",&T);
-    while(T--){
-        scanf("%s %[^\n]",text1,text2);
-        
-        if(DEBUG){
-            int l1 = strlen(text1);
-            int l2 = strlen(text2);
-            printf("%s %s %d %d \n",text1,text2,l1,l2);
-        }
-        result = solve(text1, text2);
-        printf("%d\n",result);
     }
     return 0;
 }

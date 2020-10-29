@@ -13,18 +13,6 @@ int compare_characters(const int a, const int b){
         d_b  = b - 64;
     }
     return abs(d_a-d_b);
-    /*
-    if((a >= 65 && a <= 90) && (b >= 65 && b <= 90) && (a == b)){
-        return 1;
-    }else if((a >= 97 && a <= 122) && (b >= 97 && b <= 122) && (a == b)){
-        return 1;
-    }else if((a >= 65 && a <= 90) && (b >= 97 && b <= 122) && (a + 32 == b)){
-        return 1;
-    }else if((a >= 97 && a <= 122) && (b >= 65 && b <= 90) && (a == b + 32)){
-        return 1;
-    }
-    return 0;
-    */
 }
 int get_minimum(const int a, const  int b){
     if(a > b){
@@ -47,6 +35,7 @@ void display_table( long long int**dp, const int l1,const int l2){
     }
     printf("\n");
 }
+
 int solve(const char text1[1001], const char text2[1001]){
     int l1 = strlen(text1);
     int l2 = strlen(text2);
@@ -56,23 +45,30 @@ int solve(const char text1[1001], const char text2[1001]){
     int cost = 1;
     for(i = 0; i < 2; i++){
         dp[i] = (long long int*)malloc(sizeof(long long int)*(l2+1));
-        for(j = 0; j <= l2; j++){
+        dp[0][0] = 0;
+        for(j = 1; j <= l2; j++){
             if(i == 0){
-                dp[i][j] = j%q;
+                dp[i][j] = dp[i][j-1] + get_position(text2[j-1]);
             }else{
                 dp[i][j] = 0;
             }
         }
     }
+    //display_table(dp,l1,l2);  
+
     for(i = 1; i <= l1; i++){
-        dp[i%2][0] = i%q;
+        dp[i%2][0] = dp[(i-1)%2][0] + get_position(text1[i-1]);
         for(j = 1; j <= l2; j++){
             cost = compare_characters(text1[i-1],text2[j-1]);
-            dp[i%2][j] = get_minimum(dp[(i - 1) % 2][j]%q + cost%q, 
-                get_minimum(dp[(i - 1)% 2][j - 1]%q + cost%q, dp[i % 2][j - 1]%q + cost%q));
-        }  
+            dp[i%2][j] = get_minimum(dp[(i - 1) % 2][j]%q + get_position(text1[i-1]), 
+                get_minimum(dp[(i - 1)% 2][j - 1]%q + cost%q, dp[i % 2][j - 1]%q+ get_position(text2[j-1])));
+        }
+        //display_table(dp,l1,l2);  
     }
-    //display_table(dp,l1,l2);
+    
+    if(DEBUG){
+        display_table(dp,l1,l2);
+    }
     result = dp[l1%2][l2];
     for(i = 0; i < 2; i++){
         free(dp[i]);
@@ -81,7 +77,27 @@ int solve(const char text1[1001], const char text2[1001]){
     return result%q;
 
 }
+int main(){
+    int T;
+    char text1[1001];
+    char text2[1001];
+    int result;
+    scanf("%d",&T);
+    while(T--){
+        scanf("%s %[^\n]",text1,text2);
+        
+        if(DEBUG){
+            int l1 = strlen(text1);
+            int l2 = strlen(text2);
+            printf("%s %s %d %d \n",text1,text2,l1,l2);
+        }
+        result = solve(text1, text2);
+        printf("%d\n",result);
+    }
+    return 0;
+}
 
+/*
 int main(){
     int T;
     char c;
@@ -143,26 +159,6 @@ int main(){
         }
         printf("%lld\n",result);
 
-    }
-    return 0;
-}
-/*
-int main(){
-    int T;
-    char text1[1000];
-    char text2[1000];
-    int result;
-    scanf("%d",&T);
-    while(T--){
-        scanf("%s %[^\n]",text1,text2);
-        
-        if(DEBUG){
-            int l1 = strlen(text1);
-            int l2 = strlen(text2);
-            printf("%s %s %d %d \n",text1,text2,l1,l2);
-        }
-        result = solve(text1, text2);
-        printf("%d\n",result);
     }
     return 0;
 }

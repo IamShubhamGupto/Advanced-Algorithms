@@ -3,7 +3,6 @@
 #include<string.h>
 #define DEBUG 0
 #define q 1000000007
-
 int compare_characters(const int a, const int b){
     
     int d_a = a - 96;;
@@ -34,7 +33,13 @@ int get_minimum(const int a, const  int b){
     }
     return a;
 }
-void display_table( long long int**dp, const int l1,const int l2){
+int get_maximum(const int a, const  int b){
+    if(a > b){
+        return a;
+    }
+    return b;
+}
+void display_table(long long int**dp, const int l1,const int l2){
     for(int i = 0; i < 2; i++){
         for(int j = 0; j <= l2; j++){
             printf("%lld ",dp[i][j]);
@@ -48,37 +53,33 @@ int solve(const char text1[1001], const char text2[1001]){
     int l2 = strlen(text2);
     int i,j;
     long long int result;
-    long long int** dp = (long long int**)malloc(sizeof(long long int*)*2);
-    int cost = 1;
-    for(i = 0; i < 2; i++){
+    long long int** dp = (long long int**)malloc(sizeof(int*)*(2));
+    for(i = 0; i <2; i++){
         dp[i] = (long long int*)malloc(sizeof(long long int)*(l2+1));
-        for(j = 0; j <= l2; j++){
-            if(i == 0){
-                dp[i][j] = j%q;
-            }else{
-                dp[i][j] = 0;
-            }
+        dp[i][0] = 0;
+        for(j = 0;j <= l2; j++){
+            dp[0][j] = 0;
         }
     }
     for(i = 1; i <= l1; i++){
-        dp[i%2][0] = i%q;
         for(j = 1; j <= l2; j++){
-            //cost = compare_characters(text1[i-1],text2[j-1]);
             if(compare_characters(text1[i-1],text2[j-1]) == 0){
-                cost = 0;
+                dp[i%2][j] = dp[(i-1)%2][j-1]%q + 1;
             }else{
-                cost = 1;
+                dp[i%2][j] = get_maximum(dp[i%2][j-1], dp[(i-1)%2][j])%q;
             }
-            dp[i%2][j] = get_minimum(dp[(i - 1) % 2][j]+1, get_minimum(dp[(i - 1)% 2][j - 1] + cost, dp[i % 2][j - 1]+1));
-        }  
+        } 
     }
-    //display_table(dp,l1,l2);
+    if(DEBUG){
+        display_table(dp,l1,l2);
+    }
+    
     result = dp[l1%2][l2];
-    for(i = 0; i < 2; i++){
+    for(i = 0; i <2; i++){
         free(dp[i]);
     }
     free(dp);
-    return result%q;
+    return (l1%q - result%q + l2%q - result%q + q)%q;
 
 }
 int main(){
