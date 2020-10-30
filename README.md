@@ -11,6 +11,12 @@ Implementations of all algorithms learnt in the course UE18CS311
 * Find longest common prefix in 2 substrings of a string using Rabin Karp and Binary Search method
     [link to a similar question](https://www.codechef.com/problems/INSQ15_A)
 
+### Assignment 3
+* K Factor: Find number of strings of length N with K occurences of "abba"
+* Find Edit distance with Insert + Delete using LCS algorithm
+* Find Edit distance with Insert + Delete + Subtitution
+* Find Edit distance with Weighted Insert + Weighted Delete + Weighted Subtitution
+
 ## Chapter - 2 String_Comparisons
 * Naive String Algorithm
 * Modified Naive String Algorithm
@@ -18,7 +24,7 @@ Implementations of all algorithms learnt in the course UE18CS311
 * Knuth-Morris-Pratt Algorithm
 * Finite Automata String matching algorithm
 
-## Chpater - 5 Dynamic_Programming
+## Chapter - 5 Dynamic_Programming
 * Coin Row Problem  
 * Rod Cutting Problem
 * Matrix Chain Multiplication
@@ -32,3 +38,6 @@ Implementations of all algorithms learnt in the course UE18CS311
 * ~~\[C5\] Rod Cutting problem~~
 * ~~\[C5\] Matrix Chain multiplication~~
 * ~~\[C5\] Longest Common Subsequence~~
+* \[C3\] Ford Fulkerson Algorithm
+* \[C3\] Max Flow Min Cut Algorithm
+* \[C3\] Fast Fourier Transform Algorithm
