@@ -17,6 +17,9 @@ Implementations of all algorithms learnt in the course UE18CS311
 * Find Edit distance with Insert + Delete + Subtitution
 * Find Edit distance with Weighted Insert + Weighted Delete + Weighted Subtitution
 
+### Assignment 4
+* Polynomial multiplication using FFT algorithm
+
 ## Chapter - 2 String_Comparisons
 * Naive String Algorithm
 * Modified Naive String Algorithm
@@ -40,4 +43,4 @@ Implementations of all algorithms learnt in the course UE18CS311
 * ~~\[C5\] Longest Common Subsequence~~
 * \[C3\] Ford Fulkerson Algorithm
 * \[C3\] Max Flow Min Cut Algorithm
-* \[C3\] Fast Fourier Transform Algorithm
+* ~~\[C3\] Fast Fourier Transform Algorithm (done in A4)~~
