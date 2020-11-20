@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<math.h>
-#include<complex.h>
+//#include<complex.h>
 #define DEBUG 1
 #define PI M_PI
 
@@ -135,7 +135,7 @@ void multiply_polynomials(complex_t* a, complex_t* b, int n){
     }
     do_fft(y_a,a,n,1);
     for(i = 0; i < n-1; i++){
-        a[i].real_ = a[i].real_/n;
+        a[i].real_ /= n;
     }
     free(y_a);
     free(y_b);
