@@ -2,9 +2,9 @@
 #include<stdlib.h>
 #include<math.h>
 //#include<complex.h>
-#define DEBUG 1
+#define DEBUG 0
 #define PI M_PI
-
+//typedef long double ld;
 struct cmplx{
     double real_;
     double imag_;
@@ -51,7 +51,9 @@ int main(){
     }
     multiply_polynomials(a_coeff,b_coeff,2*degree_bound);
     for(i = 0; i < 2*degree_bound; i++){
-        printf("%lf ",a_coeff[i].real_);
+        if(a_coeff[i].real_ > -1.000000000000000 && a_coeff[i].real_ < 1.000000000000000)
+            a_coeff[i].real_ = 0;
+        printf("%.0f ",a_coeff[i].real_);
     }
     printf("\n");
     free(a_coeff);
@@ -59,7 +61,7 @@ int main(){
     return 0;
 }
 
-void do_fft(complex_t* a, complex_t* y, int n, int inv){
+void do_fft(complex_t* a, complex_t* y, int n, int inverse){
     complex_t w;
     w.real_ = 1.0;
     w.imag_ = 0.0;
@@ -79,24 +81,24 @@ void do_fft(complex_t* a, complex_t* y, int n, int inv){
     complex_t* a_1 = (complex_t*)malloc(sizeof(complex_t)*(n/2));
     complex_t* y_0 = (complex_t*)malloc(sizeof(complex_t)*(n/2));
     complex_t* y_1 = (complex_t*)malloc(sizeof(complex_t)*(n/2));
-
-    if(inv){
-        w_n.real_ = cos(-2*PI/n);;
-        w_n.imag_ = sin(-2*PI/n);
-    }else{
-        w_n.real_ = cos(2*PI/n);;
-        w_n.imag_ = sin(2*PI/n);
+    w_n.real_ = cos(2*PI/(double)n);
+    w_n.imag_ = sin(2*PI/(double)n);
+    if(inverse){
+        w_n.real_ = cos(-2*PI/(double)n);
+        w_n.imag_ = sin(-2*PI/(double)n);
     }   
 
     for(i = 0; i < (n/2); i++){
         a_0[i] = a[2*i];
         a_1[i] = a[(2*i) +1];
     }
-    do_fft(a_0,y_0,n/2,inv);
-    do_fft(a_1,y_1,n/2,inv);
+
+    do_fft(a_0,y_0,n/2,inverse);
+    do_fft(a_1,y_1,n/2,inverse);
+    
     if(DEBUG){
         printf("[do_fft]w_n\n");
-        printf("%lf %lf\n",w_n.real_, w_n.imag_);
+        printf("Nth root of unity = %Lf %Lf\n",w_n.real_, w_n.imag_);
         printf("[do_fft] y_0\n");
         for(i = 0; i < n/2; i++){
             printf("(%lf %lf) ",y_0[i].real_, y_0[i].imag_);
@@ -127,13 +129,17 @@ void multiply_polynomials(complex_t* a, complex_t* b, int n){
     complex_t* y_a = (complex_t*)malloc(sizeof(complex_t)*n);
     complex_t* y_b = (complex_t*)malloc(sizeof(complex_t)*n);
     int i,j;
+
     do_fft(a, y_a, n, 0);
     do_fft(b, y_b, n, 0);
+
     for(i = 0; i < n; i++){
         complex_t temp = multiply_complexes(y_a[i],y_b[i]);
         y_a[i] = temp;
     }
+
     do_fft(y_a,a,n,1);
+
     for(i = 0; i < n-1; i++){
         a[i].real_ /= n;
     }

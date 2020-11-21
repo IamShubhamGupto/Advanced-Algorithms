@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
-#define DEBUG 1
+#define DEBUG 0
 #define Q 1000000007
 long long int get_inverse(long long int, long long int);
 long long int euclid_extended(long long int, long long int , long long int*, long long int*);
@@ -18,7 +18,7 @@ int main(){
     int i;
     for(i = 0; i < N; i++){
         scanf("%d %d", divisors+i, remainders+i);
-        divisor_product = ((divisor_product%Q)*(divisors[i]%Q))%Q;
+        divisor_product = ((divisor_product)*(divisors[i]));
     }
     if(DEBUG){
         printf("divisor_product = %llu\n",divisor_product);
@@ -32,18 +32,15 @@ int main(){
         b = divisor_product/divisors[i];
         b_inverse = get_inverse(b, divisors[i]);
         b_prime = b_inverse%divisors[i];
-        if(DEBUG){
-            printf("b = %llu, b_prime = %llu\n", b, b_prime);
-        }
-        product = ((remainders[i]%Q)*(b%Q)*(b_prime%Q))%Q;
+        product = ((remainders[i])*(b)*(b_prime));
         if(DEBUG)
-            printf("\nproduct = %llu \n", product);
+            printf("b = %llu, b_prime = %llu\n\nproduct = %llu \n",b, b_prime, product);
         ans = ((ans) + (product));
     }
     if(DEBUG){
-        printf("\nans = %llu",ans%Q);
+        printf("\nans = %llu\n",ans);
     }
-    printf("%lld\n",(ans%divisor_product)%Q);
+    printf("%llu\n",(ans%divisor_product)%Q);
     free(remainders);
     free(divisors);
     return 0;
@@ -53,6 +50,9 @@ long long int get_inverse(long long int b, long long int m){
     long long int x;
     long long int y;
     long long int gcd = euclid_extended(b , m, &x, &y);
+    if(DEBUG){
+        printf("GCD OF %llu and %llu = %llu\n",b,m,gcd);
+    }
     if(gcd != 1){
         return -1;
     }
