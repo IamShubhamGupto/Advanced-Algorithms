@@ -40,7 +40,7 @@ int main(){
     if(DEBUG){
         printf("\nans = %llu\n",ans);
     }
-    printf("%llu\n",(ans%divisor_product)%Q);
+    printf("%llu\n",(ans%divisor_product));
     free(remainders);
     free(divisors);
     return 0;

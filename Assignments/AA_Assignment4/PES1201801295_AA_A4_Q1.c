@@ -6,8 +6,8 @@
 #define PI M_PI
 //typedef long double ld;
 struct cmplx{
-    double real_;
-    double imag_;
+    long double real_;
+    long double imag_;
 };
 typedef struct cmplx complex_t;
 
@@ -24,11 +24,11 @@ int main(){
     complex_t* a_coeff = (complex_t*)malloc(sizeof(complex_t)*2*degree_bound);
     complex_t* b_coeff = (complex_t*)malloc(sizeof(complex_t)*2*degree_bound);
     for(i = 0; i < degree_bound; i++){
-        scanf("%lf",&a_coeff[i].real_ );
+        scanf("%Lf",&a_coeff[i].real_ );
         a_coeff[i].imag_ = 0.0;
     }
     for(i = 0; i < degree_bound; i++){
-        scanf("%lf",&b_coeff[i].real_ );
+        scanf("%Lf",&b_coeff[i].real_ );
         b_coeff[i].imag_ = 0.0;
     }
 
@@ -41,11 +41,11 @@ int main(){
     if(DEBUG){
         printf("[main]A recieved \n");
         for(i = 0; i < 2*degree_bound; i++){
-            printf("%lf ",a_coeff[i].real_);
+            printf("%Lf ",a_coeff[i].real_);
         }
         printf("\n[main]B recieved\n");
         for(i = 0; i < 2*degree_bound; i++){
-            printf("%lf ",b_coeff[i].real_);
+            printf("%Lf ",b_coeff[i].real_);
         }
         printf("\n");
     }
@@ -53,7 +53,7 @@ int main(){
     for(i = 0; i < 2*degree_bound; i++){
         if(a_coeff[i].real_ > -1.000000000000000 && a_coeff[i].real_ < 1.000000000000000)
             a_coeff[i].real_ = 0;
-        printf("%.0f ",a_coeff[i].real_);
+        printf("%.0Lf ",a_coeff[i].real_);
     }
     printf("\n");
     free(a_coeff);
@@ -101,12 +101,12 @@ void do_fft(complex_t* a, complex_t* y, int n, int inverse){
         printf("Nth root of unity = %Lf %Lf\n",w_n.real_, w_n.imag_);
         printf("[do_fft] y_0\n");
         for(i = 0; i < n/2; i++){
-            printf("(%lf %lf) ",y_0[i].real_, y_0[i].imag_);
+            printf("(%Lf %Lf) ",y_0[i].real_, y_0[i].imag_);
         }
         printf("\n");
         printf("[do_fft] y_1\n");
         for(i = 0; i < n/2; i++){
-            printf("(%lf %lf) ",y_1[i].real_, y_1[i].imag_);
+            printf("(%Lf %Lf) ",y_1[i].real_, y_1[i].imag_);
         }
         printf("\n");
     }

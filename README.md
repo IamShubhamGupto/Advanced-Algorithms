@@ -1,5 +1,5 @@
 # Advanced-Algorithms
-Implementations of all algorithms learnt in the course UE18CS311
+Implementations of most algorithms learnt in the course UE18CS311
 
 ## Assignments
 ### Assignment 1
@@ -19,6 +19,7 @@ Implementations of all algorithms learnt in the course UE18CS311
 
 ### Assignment 4
 * Polynomial multiplication using FFT algorithm
+* Solving linear equations using Chinese Remainder Theorem
 
 ## Chapter - 2 String_Comparisons
 * Naive String Algorithm
@@ -26,6 +27,12 @@ Implementations of all algorithms learnt in the course UE18CS311
 * Rabin-Karp Algorithm
 * Knuth-Morris-Pratt Algorithm
 * Finite Automata String matching algorithm
+
+## Chapter - 3 Max Flow, Polynomials and FFT
+* Recursive FFT for polynomial multiplication
+
+## Chapter - 4 Number Theory
+* Chinese Remainder Theorem
 
 ## Chapter - 5 Dynamic_Programming
 * Coin Row Problem  
@@ -44,3 +51,7 @@ Implementations of all algorithms learnt in the course UE18CS311
 * \[C3\] Ford Fulkerson Algorithm
 * \[C3\] Max Flow Min Cut Algorithm
 * ~~\[C3\] Fast Fourier Transform Algorithm (done in A4)~~
+* \[C4\] Euclids Algorithm
+* \[C4\] Euclids Extended algorithm
+* \[C4\] RSA encryption
+
