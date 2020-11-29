@@ -1,5 +1,5 @@
 # Advanced-Algorithms
-Implementations of most algorithms learnt in the course UE18CS311
+Implementations of most algorithms learnt in the course UE18CS311 by PES University.
 
 ## Assignments
 ### Assignment 1
@@ -8,7 +8,7 @@ Implementations of most algorithms learnt in the course UE18CS311
 
 ### Assignment 2
 * Find longest common prefix in 2 strings using minimum R rotations
-* Find longest common prefix in 2 substrings of a string using Rabin Karp and Binary Search method
+* Find longest common prefix in 2 substrings of a string using Rabin Karp and Binary Search method.  
     [link to a similar question](https://www.codechef.com/problems/INSQ15_A)
 
 ### Assignment 3
@@ -21,6 +21,10 @@ Implementations of most algorithms learnt in the course UE18CS311
 * Polynomial multiplication using FFT algorithm
 * Solving linear equations using Chinese Remainder Theorem
 
+## Chapter - 1 Basics_Of_Complexity
+* Dynamic Table - A1
+* Splay Trees - A1
+
 ## Chapter - 2 String_Comparisons
 * Naive String Algorithm
 * Modified Naive String Algorithm
@@ -29,10 +33,10 @@ Implementations of most algorithms learnt in the course UE18CS311
 * Finite Automata String matching algorithm
 
 ## Chapter - 3 Max Flow, Polynomials and FFT
-* Recursive FFT for polynomial multiplication
+* Recursive FFT for polynomial multiplication - A4
 
 ## Chapter - 4 Number Theory
-* Chinese Remainder Theorem
+* Chinese Remainder Theorem - A4
 
 ## Chapter - 5 Dynamic_Programming
 * Coin Row Problem  
@@ -42,7 +46,7 @@ Implementations of most algorithms learnt in the course UE18CS311
 
 ### ToDo
 * ~~\[C2\] FSM~~   
-* \[C2\] Suffix Tree
+* ~~\[C2\] Suffix Tree~~
 * ~~Assignment 1~~
 * ~~Assignment 2~~
 * ~~\[C5\] Rod Cutting problem~~
