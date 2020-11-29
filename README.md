@@ -22,8 +22,8 @@ Implementations of most algorithms learnt in the course UE18CS311 by PES Univers
 * Solving linear equations using Chinese Remainder Theorem
 
 ## Chapter - 1 Basics_Of_Complexity
-* Dynamic Table - A1
-* Splay Trees - A1
+* Dynamic Table - A1 - Q1
+* Splay Trees - A1 - Q2
 
 ## Chapter - 2 String_Comparisons
 * Naive String Algorithm
@@ -33,10 +33,11 @@ Implementations of most algorithms learnt in the course UE18CS311 by PES Univers
 * Finite Automata String matching algorithm
 
 ## Chapter - 3 Max Flow, Polynomials and FFT
-* Recursive FFT for polynomial multiplication - A4
+* Recursive FFT for polynomial multiplication - A4 - Q1
 
 ## Chapter - 4 Number Theory
-* Chinese Remainder Theorem - A4
+* Chinese Remainder Theorem - A4 - Q2
+* Euclids Extended Algorithm - A4 - Q2
 
 ## Chapter - 5 Dynamic_Programming
 * Coin Row Problem  
@@ -56,6 +57,6 @@ Implementations of most algorithms learnt in the course UE18CS311 by PES Univers
 * \[C3\] Max Flow Min Cut Algorithm
 * ~~\[C3\] Fast Fourier Transform Algorithm (done in A4)~~
 * \[C4\] Euclids Algorithm
-* \[C4\] Euclids Extended algorithm
+* ~~\[C4\] Euclids Extended algorithm~~
 * \[C4\] RSA encryption
 
